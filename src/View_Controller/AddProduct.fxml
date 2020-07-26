@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View_Controller.AddProductController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="516.0" prefWidth="775.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.AddProductController">
+   <children>
+      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="478.0" prefWidth="729.0" style="-fx-border-color: black; -fx-border-radius: 10;">
+         <children>
+            <Label layoutX="48.0" layoutY="40.0" text="Add Product" />
+            <Button fx:id="Search" layoutX="432.0" layoutY="35.0" mnemonicParsing="false" onAction="#searchHandler" text="Search" />
+            <TextField fx:id="SearchField" layoutX="501.0" layoutY="35.0" />
+            <TableView layoutX="271.0" layoutY="70.0" prefHeight="110.0" prefWidth="394.0">
+              <columns>
+                <TableColumn fx:id="PartIDAdd" prefWidth="75.0" text="Part ID" />
+                <TableColumn fx:id="PartNameAdd" prefWidth="101.0" text="Part Name" />
+                  <TableColumn fx:id="InventoryLevelAdd" prefWidth="98.0" text="Inventory Level" />
+                  <TableColumn fx:id="PriceAdd" prefWidth="119.0" text="Price per Unit" />
+              </columns>
+            </TableView>
+            <Label fx:id="ID" layoutX="18.0" layoutY="81.0" text="ID" />
+            <Label fx:id="Name" layoutX="18.0" layoutY="125.0" text="Name" />
+            <Label fx:id="Inv" layoutX="18.0" layoutY="163.0" text="Inv" />
+            <Label fx:id="Price" layoutX="18.0" layoutY="198.0" text="Price" />
+            <Label fx:id="Max" layoutX="18.0" layoutY="237.0" text="Max" />
+            <TextField disable="true" layoutX="63.0" layoutY="76.0" onAction="#idHandler" prefHeight="27.0" prefWidth="113.0" />
+            <TextField layoutX="63.0" layoutY="120.0" onAction="#nameHandler" prefHeight="27.0" prefWidth="113.0" />
+            <TextField layoutX="63.0" layoutY="158.0" onAction="#invHandler" prefHeight="27.0" prefWidth="113.0" />
+            <TextField layoutX="63.0" layoutY="193.0" onAction="#priceHandler" prefHeight="27.0" prefWidth="113.0" />
+            <TextField layoutX="63.0" layoutY="232.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="55.0" />
+            <Label fx:id="Min" layoutX="146.0" layoutY="237.0" text="Min" />
+            <TextField layoutX="188.0" layoutY="232.0" onAction="#minHandler" prefHeight="27.0" prefWidth="55.0" />
+            <Button layoutX="610.0" layoutY="202.0" mnemonicParsing="false" onAction="#addhandler" text="Add" />
+            <TableView layoutX="271.0" layoutY="259.0" prefHeight="110.0" prefWidth="394.0">
+               <columns>
+                  <TableColumn fx:id="PartIDIncluded" prefWidth="75.0" text="Part ID" />
+                  <TableColumn fx:id="PartNameIncluded" prefWidth="108.0" text="Part Name" />
+                  <TableColumn fx:id="InventoryLevelIncluded" prefWidth="99.0" text="Inventory Level" />
+                  <TableColumn fx:id="PriceIncluded" prefWidth="111.0" text="Price per Unit" />
+               </columns>
+            </TableView>
+            <Button layoutX="610.0" layoutY="378.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
+            <Button layoutX="610.0" layoutY="430.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+            <Button layoutX="543.0" layoutY="430.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
