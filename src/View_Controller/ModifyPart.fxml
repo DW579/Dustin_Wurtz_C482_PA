@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ModifyPartController">
+   <children>
+      <Label layoutX="59.0" layoutY="39.0" text="Modify Part" />
+      <RadioButton fx:id="InHouse" layoutX="220.0" layoutY="39.0" mnemonicParsing="false" text="In-House" />
+      <RadioButton fx:id="Outsourced" layoutX="356.0" layoutY="39.0" mnemonicParsing="false" text="Outsourced" />
+      <Label fx:id="ID" layoutX="140.0" layoutY="81.0" text="ID" />
+      <Label fx:id="Name" layoutX="140.0" layoutY="116.0" text="Name" />
+      <TextField disable="true" layoutX="195.0" layoutY="76.0" onAction="#idHandler" />
+      <TextField layoutX="195.0" layoutY="111.0" onAction="#nameHandler" />
+      <Label fx:id="Inv" layoutX="140.0" layoutY="155.0" text="Inv" />
+      <Label fx:id="Price" layoutX="120.0" layoutY="192.0" text="Price/Cost" />
+      <Label fx:id="Max" layoutX="140.0" layoutY="231.0" text="Max" />
+      <Label fx:id="CompanyName" layoutX="96.0" layoutY="266.0" text="Company Name" />
+      <TextField layoutX="195.0" layoutY="150.0" onAction="#invHandler" />
+      <TextField layoutX="195.0" layoutY="187.0" onAction="#priceHandler" />
+      <TextField layoutX="195.0" layoutY="226.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="75.0" />
+      <TextField layoutX="195.0" layoutY="261.0" onAction="#companyHandler" />
+      <Label fx:id="Min" layoutX="312.0" layoutY="231.0" text="Min" />
+      <TextField layoutX="350.0" layoutY="226.0" onAction="#minHandler" prefHeight="27.0" prefWidth="89.0" />
+      <Button layoutX="373.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
+      <Button layoutX="466.0" layoutY="331.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+   </children>
+</AnchorPane>
