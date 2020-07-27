@@ -31,7 +31,6 @@ public class MainScreenController {
     }
 
     public void addHandlerParts(ActionEvent actionEvent) throws IOException {
-        System.out.println("Add a part");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPart.fxml"));
         Parent rootAddPart = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -51,8 +50,16 @@ public class MainScreenController {
     public void searchHandlerProducts(ActionEvent actionEvent) {
     }
 
-    public void addHandlerProducts(ActionEvent actionEvent) {
+    public void addHandlerProducts(ActionEvent actionEvent) throws IOException {
         System.out.println("Add a product");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+        Parent rootAddProduct = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Add Product");
+        stage.setScene(new Scene(rootAddProduct));
+        stage.show();
     }
 
     public void modifyHandlerProducts(ActionEvent actionEvent) {
@@ -62,7 +69,6 @@ public class MainScreenController {
     }
 
     public void exitHandler(ActionEvent actionEvent) {
-        System.out.println("exit button clicked");
         System.exit(0);
     }
 }
