@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class ModifyProductController {
     public Button Search;
@@ -23,6 +24,7 @@ public class ModifyProductController {
     public TableColumn PartNameIncluded;
     public TableColumn InventoryLevelIncluded;
     public TableColumn PriceIncluded;
+    public Button CancelButton;
 
     public void searchHandler(ActionEvent actionEvent) {
     }
@@ -52,6 +54,8 @@ public class ModifyProductController {
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
     }
 
     public void saveHandler(ActionEvent actionEvent) {

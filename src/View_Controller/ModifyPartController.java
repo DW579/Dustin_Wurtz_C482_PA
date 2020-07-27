@@ -1,8 +1,10 @@
 package View_Controller;
 
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.stage.Stage;
 
 public class ModifyPartController {
     public RadioButton InHouse;
@@ -14,6 +16,7 @@ public class ModifyPartController {
     public Label Max;
     public Label Min;
     public Label CompanyName;
+    public Button CancelButton;
 
     public void idHandler(ActionEvent actionEvent) {
     }
@@ -40,5 +43,7 @@ public class ModifyPartController {
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
     }
 }

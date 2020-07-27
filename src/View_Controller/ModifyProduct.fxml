@@ -44,7 +44,7 @@
                </columns>
             </TableView>
             <Button layoutX="644.0" layoutY="396.0" mnemonicParsing="false" onAction="#deleteHandler" text="Delete" />
-            <Button layoutX="644.0" layoutY="433.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+            <Button fx:id="CancelButton" layoutX="644.0" layoutY="433.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
             <Button layoutX="571.0" layoutY="433.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
          </children>
       </AnchorPane>

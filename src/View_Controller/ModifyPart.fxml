@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View_Controller.ModifyPartController">
    <children>
       <Label layoutX="59.0" layoutY="39.0" text="Modify Part" />
@@ -27,6 +26,6 @@
       <Label fx:id="Min" layoutX="312.0" layoutY="231.0" text="Min" />
       <TextField layoutX="350.0" layoutY="226.0" onAction="#minHandler" prefHeight="27.0" prefWidth="89.0" />
       <Button layoutX="373.0" layoutY="331.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
-      <Button layoutX="466.0" layoutY="331.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
+      <Button fx:id="CancelButton" layoutX="466.0" layoutY="331.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
    </children>
 </AnchorPane>

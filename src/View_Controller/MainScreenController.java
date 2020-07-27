@@ -41,7 +41,16 @@ public class MainScreenController {
         stage.show();
     }
 
-    public void modifyHandlerParts(ActionEvent actionEvent) {
+    public void modifyHandlerParts(ActionEvent actionEvent) throws IOException {
+        System.out.println("Modify parts");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
+        Parent rootModifyPart = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Modify Part");
+        stage.setScene(new Scene(rootModifyPart));
+        stage.show();
     }
 
     public void deleteHandlerParts(ActionEvent actionEvent) {
@@ -51,7 +60,6 @@ public class MainScreenController {
     }
 
     public void addHandlerProducts(ActionEvent actionEvent) throws IOException {
-        System.out.println("Add a product");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
         Parent rootAddProduct = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -62,7 +70,16 @@ public class MainScreenController {
         stage.show();
     }
 
-    public void modifyHandlerProducts(ActionEvent actionEvent) {
+    public void modifyHandlerProducts(ActionEvent actionEvent) throws IOException {
+        System.out.println("Modify products");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+        Parent rootModifyProduct = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Modify Product");
+        stage.setScene(new Scene(rootModifyProduct));
+        stage.show();
     }
 
     public void deleteHandlerProducts(ActionEvent actionEvent) {
