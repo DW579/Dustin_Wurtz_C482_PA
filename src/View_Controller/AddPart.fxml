@@ -17,14 +17,14 @@
       <Label fx:id="Price" layoutX="100.0" layoutY="192.0" text="Price/Cost" />
       <Label fx:id="Max" layoutX="123.0" layoutY="228.0" text="Max" />
       <Label fx:id="CompanyName" layoutX="69.0" layoutY="259.0" text="Company Name" />
-      <TextField disable="true" layoutX="170.0" layoutY="75.0" onAction="#idHandler" />
-      <TextField layoutX="170.0" layoutY="113.0" onAction="#nameHandler" />
-      <TextField layoutX="170.0" layoutY="150.0" onAction="#invHandler" />
-      <TextField layoutX="170.0" layoutY="187.0" onAction="#priceHandler" />
-      <TextField layoutX="170.0" layoutY="223.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="75.0" />
-      <TextField layoutX="170.0" layoutY="254.0" onAction="#companyNameHandler" />
+      <TextField disable="true" layoutX="170.0" layoutY="75.0" onAction="#idHandler" promptText="Auto Gen - Disabled" />
+      <TextField layoutX="170.0" layoutY="113.0" onAction="#nameHandler" promptText="Part Name" />
+      <TextField layoutX="170.0" layoutY="150.0" onAction="#invHandler" promptText="Inv" />
+      <TextField layoutX="170.0" layoutY="187.0" onAction="#priceHandler" promptText="Price/Cost" />
+      <TextField layoutX="170.0" layoutY="223.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="75.0" promptText="Max" />
+      <TextField layoutX="170.0" layoutY="254.0" onAction="#companyNameHandler" promptText="Comp. Nm" />
       <Label fx:id="Min" layoutX="285.0" layoutY="228.0" text="Min" />
-      <TextField layoutX="331.0" layoutY="223.0" onAction="#minHandler" prefHeight="27.0" prefWidth="89.0" />
+      <TextField layoutX="331.0" layoutY="223.0" onAction="#minHandler" prefHeight="27.0" prefWidth="89.0" promptText="Min" />
       <Button layoutX="380.0" layoutY="327.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
       <Button fx:id="Cancel" layoutX="462.0" layoutY="327.0" mnemonicParsing="false" onAction="#cancelHandler" text="Cancel" />
    </children>

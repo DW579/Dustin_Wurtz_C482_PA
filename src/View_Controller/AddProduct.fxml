@@ -27,13 +27,13 @@
             <Label fx:id="Inv" layoutX="18.0" layoutY="163.0" text="Inv" />
             <Label fx:id="Price" layoutX="18.0" layoutY="198.0" text="Price" />
             <Label fx:id="Max" layoutX="18.0" layoutY="237.0" text="Max" />
-            <TextField disable="true" layoutX="63.0" layoutY="76.0" onAction="#idHandler" prefHeight="27.0" prefWidth="113.0" />
-            <TextField layoutX="63.0" layoutY="120.0" onAction="#nameHandler" prefHeight="27.0" prefWidth="113.0" />
-            <TextField layoutX="63.0" layoutY="158.0" onAction="#invHandler" prefHeight="27.0" prefWidth="113.0" />
-            <TextField layoutX="63.0" layoutY="193.0" onAction="#priceHandler" prefHeight="27.0" prefWidth="113.0" />
-            <TextField layoutX="63.0" layoutY="232.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="55.0" />
+            <TextField disable="true" layoutX="63.0" layoutY="76.0" onAction="#idHandler" prefHeight="27.0" prefWidth="137.0" promptText="Auto Gen - Disabled" />
+            <TextField layoutX="63.0" layoutY="120.0" onAction="#nameHandler" prefHeight="27.0" prefWidth="137.0" promptText="Product Name" />
+            <TextField layoutX="63.0" layoutY="158.0" onAction="#invHandler" prefHeight="27.0" prefWidth="137.0" promptText="Inv" />
+            <TextField layoutX="63.0" layoutY="193.0" onAction="#priceHandler" prefHeight="27.0" prefWidth="137.0" promptText="Price" />
+            <TextField layoutX="63.0" layoutY="232.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="55.0" promptText="Max" />
             <Label fx:id="Min" layoutX="146.0" layoutY="237.0" text="Min" />
-            <TextField layoutX="188.0" layoutY="232.0" onAction="#minHandler" prefHeight="27.0" prefWidth="55.0" />
+            <TextField layoutX="188.0" layoutY="232.0" onAction="#minHandler" prefHeight="27.0" prefWidth="55.0" promptText="Min" />
             <Button layoutX="610.0" layoutY="202.0" mnemonicParsing="false" onAction="#addhandler" text="Add" />
             <TableView layoutX="271.0" layoutY="259.0" prefHeight="110.0" prefWidth="394.0">
                <columns>
