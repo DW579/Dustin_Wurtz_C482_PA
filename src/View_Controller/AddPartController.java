@@ -23,6 +23,8 @@ public class AddPartController {
     public TextField CompanyNameField;
     public Button Cancel;
 
+    private static int dynamicPartId = 0;
+
     public void inHouseHandler(ActionEvent actionEvent) {
     }
 
@@ -33,9 +35,13 @@ public class AddPartController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
-        System.out.println(NameField.getText());
+        double priceDouble = Double.parseDouble(PriceField.getText());
+        int stockInt = Integer.parseInt(InvField.getText());
+        int minInt = Integer.parseInt(MinField.getText());
+        int maxInt = Integer.parseInt((MaxField.getText()));
+        dynamicPartId += 1;
 
-        InHouse newPart = new InHouse(1, "The Name", 12.34, 2, 1, 15, 0);
+        InHouse newPart = new InHouse(dynamicPartId, NameField.getText(), priceDouble, stockInt, minInt, maxInt, 0);
         Inventory.addPart(newPart);
 
         // Close save window after save
