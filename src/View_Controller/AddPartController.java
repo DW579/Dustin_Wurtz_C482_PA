@@ -14,15 +14,14 @@ import javafx.stage.Stage;
 public class AddPartController {
     public RadioButton InHouse;
     public RadioButton Outsourced;
-    public Label ID;
-    public Label Name;
-    public Label Inv;
-    public Label Price;
-    public Label Max;
-    public Label Min;
-    public Label CompanyName;
-    public Button Cancel;
+    public TextField IdField;
     public TextField NameField;
+    public TextField InvField;
+    public TextField PriceField;
+    public TextField MinField;
+    public TextField MaxField;
+    public TextField CompanyNameField;
+    public Button Cancel;
 
     public void inHouseHandler(ActionEvent actionEvent) {
     }
@@ -33,26 +32,12 @@ public class AddPartController {
     public void idHandler(ActionEvent actionEvent) {
     }
 
-    public void nameHandler(ActionEvent actionEvent) {
-
-    }
-
-    public void invHandler(ActionEvent actionEvent) {
-    }
-
-    public void priceHandler(ActionEvent actionEvent) {
-    }
-
-    public void maxHandler(ActionEvent actionEvent) {
-    }
-
-    public void minHandler(ActionEvent actionEvent) {
-    }
-
-    public void companyNameHandler(ActionEvent actionEvent) {
-    }
-
     public void saveHandler(ActionEvent actionEvent) {
+        System.out.println(NameField.getText());
+
+        InHouse newPart = new InHouse(1, "The Name", 12.34, 2, 1, 15, 0);
+        Inventory.addPart(newPart);
+
         // Close save window after save
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();

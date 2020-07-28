@@ -24,12 +24,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainScreenController {
+    @FXML
+    private TableView<Part> PartsTableView;
+    @FXML
+    private TableColumn<Part, Integer> PartID;
+    @FXML
+    private TableColumn<Part, String> PartName;
+    @FXML
+    private TableColumn<Part, Integer> InventoryLevelParts;
+    @FXML
+    private TableColumn<Part, Double> PriceParts;
+
+
     public Button SearchParts;
     public TextField SearchTextParts;
-    public TableColumn PartID;
-    public TableColumn PartName;
-    public TableColumn InventoryLevelParts;
-    public TableColumn PriceParts;
     public Button SearchProducts;
     public TextField SearchTextProducts;
     public TableColumn ProductID;
@@ -97,6 +105,15 @@ public class MainScreenController {
 
     public void exitHandler(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    @FXML
+    private void initialize() {
+        PartID.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        PartName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelParts.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceParts.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        PartsTableView.setItems(Inventory.getAllParts());
     }
 
 }
