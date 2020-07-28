@@ -1,11 +1,14 @@
 package View_Controller;
 
 //import com.sun.javafx.tk.quantum.SceneState;
+import Model.InHouse;
+import Model.Inventory;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddPartController {
@@ -19,6 +22,7 @@ public class AddPartController {
     public Label Min;
     public Label CompanyName;
     public Button Cancel;
+    public TextField NameField;
 
     public void inHouseHandler(ActionEvent actionEvent) {
     }
@@ -30,6 +34,7 @@ public class AddPartController {
     }
 
     public void nameHandler(ActionEvent actionEvent) {
+
     }
 
     public void invHandler(ActionEvent actionEvent) {
@@ -48,9 +53,13 @@ public class AddPartController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+        // Close save window after save
+        Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
+        // Close save window on cancel
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
     }
