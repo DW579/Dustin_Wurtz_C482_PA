@@ -14,6 +14,10 @@ import java.io.IOException;
 
 public class ModifyPartController {
     @FXML
+    private RadioButton InHouse;
+    @FXML
+    private RadioButton Outsourced;
+    @FXML
     private TextField IdField;
     @FXML
     private TextField NameField;
@@ -27,10 +31,9 @@ public class ModifyPartController {
     private TextField MinField;
     @FXML
     private TextField SourceField;
+    @FXML
+    private Label SourceName;
 
-    public RadioButton InHouse;
-    public RadioButton Outsourced;
-    public Label SourceName;
     public Button CancelButton;
 
     public void selectedPart(int id) throws IOException {
@@ -47,9 +50,17 @@ public class ModifyPartController {
 
                 // Insert either InHouse or Outsourced data in text field
                 if(part instanceof Model.InHouse) {
+                    // Radio Button
+                    InHouse.setSelected(true);
+                    Outsourced.setSelected(false);
+                    SourceName.setText("Machine ID");
                     SourceField.setText(Integer.toString(((InHouse) part).getMachineId()));
                 }
                 else {
+                    //Radio button
+                    InHouse.setSelected(false);
+                    Outsourced.setSelected(true);
+                    SourceName.setText("Company Name");
                     SourceField.setText(((Outsourced) part).getCompanyName());
                 }
             }
