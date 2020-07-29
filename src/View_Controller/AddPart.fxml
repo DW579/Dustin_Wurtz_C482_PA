@@ -16,13 +16,13 @@
       <Label layoutX="123.0" layoutY="155.0" text="Inv" />
       <Label layoutX="100.0" layoutY="192.0" text="Price/Cost" />
       <Label layoutX="123.0" layoutY="228.0" text="Max" />
-      <Label layoutX="69.0" layoutY="259.0" text="Company Name" />
+      <Label fx:id="SourceLabel" layoutX="69.0" layoutY="259.0" text="Company Name" />
       <TextField fx:id="IdField" disable="true" layoutX="170.0" layoutY="75.0" onAction="#idHandler" promptText="Auto Gen - Disabled" />
       <TextField fx:id="NameField" layoutX="170.0" layoutY="113.0" promptText="Part Name" />
       <TextField fx:id="InvField" layoutX="170.0" layoutY="150.0" promptText="Inv" />
       <TextField fx:id="PriceField" layoutX="170.0" layoutY="187.0" promptText="Price/Cost" />
       <TextField fx:id="MaxField" layoutX="170.0" layoutY="223.0" prefHeight="27.0" prefWidth="75.0" promptText="Max" />
-      <TextField fx:id="CompanyNameField" layoutX="170.0" layoutY="254.0" promptText="Comp. Nm" />
+      <TextField fx:id="SourceField" layoutX="170.0" layoutY="254.0" promptText="Comp. Nm" />
       <Label layoutX="285.0" layoutY="228.0" text="Min" />
       <TextField fx:id="MinField" layoutX="331.0" layoutY="223.0" prefHeight="27.0" prefWidth="89.0" promptText="Min" />
       <Button layoutX="380.0" layoutY="327.0" mnemonicParsing="false" onAction="#saveHandler" text="Save" />
