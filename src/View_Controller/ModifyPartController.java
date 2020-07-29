@@ -65,12 +65,18 @@ public class ModifyPartController {
                 }
             }
         });
-        
     }
 
-    public void populateFields(int id, String name, int inv, double price, int max, int min) {
-        System.out.println("populateFields called");
-        System.out.println(name);
+    public void inHouseHandler(ActionEvent actionEvent) {
+        InHouse.setSelected(true);
+        Outsourced.setSelected(false);
+        SourceName.setText("Machine ID");
+    }
+
+    public void outsourcedHandler(ActionEvent actionEvent) {
+        InHouse.setSelected(false);
+        Outsourced.setSelected(true);
+        SourceName.setText("Company Name");
     }
 
     public void saveHandler(ActionEvent actionEvent) {
