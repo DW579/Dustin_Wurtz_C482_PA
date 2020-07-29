@@ -5,6 +5,7 @@ import Model.InHouse;
 import Model.Inventory;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -12,8 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddPartController {
-    public RadioButton InHouse;
-    public RadioButton Outsourced;
+    @FXML
+    private RadioButton InHouse;
+    @FXML
+    private RadioButton Outsourced;
+
     public TextField IdField;
     public TextField NameField;
     public TextField InvField;
@@ -26,9 +30,13 @@ public class AddPartController {
     private static int dynamicPartId = 0;
 
     public void inHouseHandler(ActionEvent actionEvent) {
+        InHouse.setSelected(true);
+        Outsourced.setSelected(false);
     }
 
     public void outsourcedHandler(ActionEvent actionEvent) {
+        InHouse.setSelected(false);
+        Outsourced.setSelected(true);
     }
 
     public void idHandler(ActionEvent actionEvent) {
@@ -38,7 +46,7 @@ public class AddPartController {
         double priceDouble = Double.parseDouble(PriceField.getText());
         int stockInt = Integer.parseInt(InvField.getText());
         int minInt = Integer.parseInt(MinField.getText());
-        int maxInt = Integer.parseInt((MaxField.getText()));
+        int maxInt = Integer.parseInt(MaxField.getText());
         dynamicPartId += 1;
 
         InHouse newPart = new InHouse(dynamicPartId, NameField.getText(), priceDouble, stockInt, minInt, maxInt, 0);
