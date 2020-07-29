@@ -18,6 +18,10 @@ public class ModifyPartController {
     public Label CompanyName;
     public Button CancelButton;
 
+    public void selectedPart(int id) {
+        System.out.println(id);
+    }
+
     public void idHandler(ActionEvent actionEvent) {
     }
 

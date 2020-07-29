@@ -5,6 +5,7 @@ import Model.Inventory;
 import Model.Part;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +36,6 @@ public class MainScreenController {
     @FXML
     private TableColumn<Part, Double> PriceParts;
 
-
     public Button SearchParts;
     public TextField SearchTextParts;
     public Button SearchProducts;
@@ -60,7 +60,7 @@ public class MainScreenController {
     }
 
     public void modifyHandlerParts(ActionEvent actionEvent) throws IOException {
-        System.out.println("Modify parts");
+        // Show Modify page
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
         Parent rootModifyPart = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -69,6 +69,13 @@ public class MainScreenController {
         stage.setTitle("Modify Part");
         stage.setScene(new Scene(rootModifyPart));
         stage.show();
+
+        // Get ID of selected table row
+        Part part = PartsTableView.getSelectionModel().getSelectedItem();
+
+        // Pass part id to ModifyPartController
+        ModifyPartController modifyPartController = fxmlLoader.getController();
+        modifyPartController.selectedPart(part.getId());
     }
 
     public void deleteHandlerParts(ActionEvent actionEvent) {

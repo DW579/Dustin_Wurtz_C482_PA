@@ -17,6 +17,10 @@ public class Inventory {
         return allParts;
     }
 
+    public static int lookUpPart(String term) {
+        return 1;
+    }
+
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }

@@ -31,8 +31,10 @@ public class AddPartController {
     public TextField MaxField;
     public Button Cancel;
 
+    // Initialize Part ID to be 0
     private static int dynamicPartId = 0;
 
+    // Initialize to have Outsourced be selected
     @FXML
     private void initialize() {
         InHouse.setSelected(false);
