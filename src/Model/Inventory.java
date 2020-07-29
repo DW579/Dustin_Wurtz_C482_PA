@@ -1,9 +1,16 @@
 package Model;
 
+import View_Controller.ModifyPartController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import java.util.Observable;
+import java.io.IOException;
 
 public class Inventory {
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
@@ -15,10 +22,6 @@ public class Inventory {
 
     public static ObservableList<Part> getAllParts() {
         return allParts;
-    }
-
-    public static int lookUpPart(String term) {
-        return 1;
     }
 
     public static void addProduct(Product newProduct) {
