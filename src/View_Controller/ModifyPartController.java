@@ -1,6 +1,8 @@
 package View_Controller;
 
+import Model.InHouse;
 import Model.Inventory;
+import Model.Outsourced;
 import Model.Part;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,12 +37,21 @@ public class ModifyPartController {
         ObservableList<Part> allPartsData = Inventory.getAllParts();
         allPartsData.forEach((part) -> {
             if( part.getId() == id) {
+                // Insert data into text field depending on id selected
                 IdField.setText(Integer.toString(part.getId()));
                 NameField.setText(part.getName());
                 InvField.setText(Integer.toString(part.getStock()));
                 PriceField.setText(Double.toString(part.getPrice()));
                 MaxField.setText(Integer.toString(part.getMax()));
                 MinField.setText(Integer.toString(part.getMin()));
+
+                // Insert either InHouse or Outsourced data in text field
+                if(part instanceof Model.InHouse) {
+                    SourceField.setText(Integer.toString(((InHouse) part).getMachineId()));
+                }
+                else {
+                    SourceField.setText(((Outsourced) part).getCompanyName());
+                }
             }
         });
         
