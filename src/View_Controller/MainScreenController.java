@@ -79,6 +79,13 @@ public class MainScreenController {
     }
 
     public void deleteHandlerParts(ActionEvent actionEvent) {
+        // Get selected table row
+        Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
+        // Delete selectedPart
+        Inventory.deletePart(selectedPart);
+        // Update the Table view
+        PartsTableView.setItems(Inventory.getAllParts());
+
     }
 
     public void searchHandlerProducts(ActionEvent actionEvent) {

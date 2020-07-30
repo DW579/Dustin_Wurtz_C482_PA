@@ -31,4 +31,8 @@ public class Inventory {
     public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
+
+    public static void deletePart(Part selectedPart) {
+        allParts.remove(selectedPart);
+    }
 }

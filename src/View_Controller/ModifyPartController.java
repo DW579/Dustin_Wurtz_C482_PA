@@ -80,6 +80,19 @@ public class ModifyPartController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+        ObservableList<Part> allPartsData = Inventory.getAllParts();
+        allPartsData.forEach((part) -> {
+            if( part.getId() == Integer.parseInt(IdField.getText())) {
+                part.setName(NameField.getText());
+                part.setStock(Integer.parseInt(InvField.getText()));
+                part.setPrice(Double.parseDouble(PriceField.getText()));
+                part.setMax(Integer.parseInt(MaxField.getText()));
+                part.setMin(Integer.parseInt(MinField.getText()));
+            }
+        });
+
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
