@@ -81,13 +81,54 @@ public class ModifyPartController {
 
     public void saveHandler(ActionEvent actionEvent) {
         ObservableList<Part> allPartsData = Inventory.getAllParts();
+
         allPartsData.forEach((part) -> {
             if( part.getId() == Integer.parseInt(IdField.getText())) {
-                part.setName(NameField.getText());
-                part.setStock(Integer.parseInt(InvField.getText()));
-                part.setPrice(Double.parseDouble(PriceField.getText()));
-                part.setMax(Integer.parseInt(MaxField.getText()));
-                part.setMin(Integer.parseInt(MinField.getText()));
+                int partId = Integer.parseInt(IdField.getText());
+                String partName = NameField.getText();
+                double partPrice = Double.parseDouble(PriceField.getText());
+                int partStock = Integer.parseInt(InvField.getText());
+                int partMax = Integer.parseInt(MaxField.getText());
+                int partMin = Integer.parseInt(MinField.getText());
+
+                // Check to see if source has changed, if so delete part in current class and then create a new object in the other class with modified data
+                if(part instanceof Model.InHouse && SourceName.getText() == "Company Name") {
+
+                    String partCompanyName = SourceField.getText();
+
+                    // New modified part
+                    Outsourced modifiedPart = new Outsourced(partId, partName, partPrice, partStock, partMin, partMax, partCompanyName);
+
+                    // Add modified part into Inventory and delete current part out of Inventory
+                    Inventory.addPart(modifiedPart);
+                    Inventory.deletePart(part);
+                }
+                else if(part instanceof Model.Outsourced && SourceName.getText() == "Machine ID") {
+                    int partMachineId = Integer.parseInt(SourceField.getText());
+
+                    InHouse modifiedPart = new InHouse(partId, partName, partPrice, partStock, partMin, partMax, partMachineId);
+
+                    // Add modified part into Inventory and delete current part out of Inventory
+                    Inventory.addPart(modifiedPart);
+                    Inventory.deletePart(part);
+                }
+                else {
+                    part.setName(partName);
+                    part.setPrice(partPrice);
+                    part.setStock(partStock);
+                    part.setMax(partMax);
+                    part.setMin(partMin);
+
+                    if(SourceName.getText() == "Machine ID") {
+                        int partMachineId = Integer.parseInt(SourceField.getText());
+                        ((InHouse) part).setMachineId(partMachineId);
+                    }
+                    else {
+                        String partCompanyName = SourceField.getText();
+                        ((Outsourced) part).setCompanyName(partCompanyName);
+                    }
+                }
+
             }
         });
 
