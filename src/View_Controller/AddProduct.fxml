@@ -14,7 +14,7 @@
             <Label layoutX="48.0" layoutY="40.0" text="Add Product" />
             <Button fx:id="Search" layoutX="432.0" layoutY="35.0" mnemonicParsing="false" onAction="#searchHandler" text="Search" />
             <TextField fx:id="SearchField" layoutX="501.0" layoutY="35.0" />
-            <TableView layoutX="271.0" layoutY="70.0" prefHeight="110.0" prefWidth="394.0">
+            <TableView fx:id="PartsTableView" layoutX="271.0" layoutY="70.0" prefHeight="110.0" prefWidth="394.0">
               <columns>
                 <TableColumn fx:id="PartIDAdd" prefWidth="75.0" text="Part ID" />
                 <TableColumn fx:id="PartNameAdd" prefWidth="101.0" text="Part Name" />

@@ -1,19 +1,27 @@
 package View_Controller;
 
+import Model.Inventory;
+import Model.Part;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AddProductController {
+
+    @FXML
+    private TableView<Part> PartsTableView;
+    @FXML
+    private TableColumn<Part, Integer> PartIDAdd;
+    @FXML
+    private TableColumn<Part, String> PartNameAdd;
+    @FXML
+    private TableColumn<Part, Integer> InventoryLevelAdd;
+    @FXML
+    private TableColumn<Part, Double> PriceAdd;
+
     public Button Search;
     public TextField SearchField;
-    public TableColumn PartIDAdd;
-    public TableColumn PartNameAdd;
-    public TableColumn InventoryLevelAdd;
-    public TableColumn PriceAdd;
     public Label ID;
     public Label Name;
     public Label Inv;
@@ -59,5 +67,14 @@ public class AddProductController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void initialize() {
+        PartIDAdd.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        PartNameAdd.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelAdd.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceAdd.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        PartsTableView.setItems(Inventory.getAllParts());
     }
 }
