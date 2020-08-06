@@ -2,13 +2,16 @@ package View_Controller;
 
 import Model.Inventory;
 import Model.Part;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AddProductController {
-
+    @FXML
+    private TextField SearchField;
     @FXML
     private TableView<Part> PartsTableView;
     @FXML
@@ -21,7 +24,6 @@ public class AddProductController {
     private TableColumn<Part, Double> PriceAdd;
 
     public Button Search;
-    public TextField SearchField;
     public Label ID;
     public Label Name;
     public Label Inv;
@@ -34,7 +36,32 @@ public class AddProductController {
     public TableColumn PriceIncluded;
     public Button Cancel;
 
+    FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
+
     public void searchHandler(ActionEvent actionEvent) {
+        filteredPartsData.setPredicate(part -> {
+            // If filter text is empty, display all persons.
+            if (SearchField.getText() == "") {
+                return true;
+            }
+
+            // Compare first name and last name of every person with filter text.
+            String lowerCaseFilter = SearchField.getText().toLowerCase();
+
+            if (part.getName().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Filter matches first name.
+            }
+            else if (Integer.toString(part.getId()).contains(lowerCaseFilter)) {
+                return true; // Filter matches last name.
+            }
+            return false; // Does not match.
+        });
+
+        SortedList<Part> sortedPartsData = new SortedList<>(filteredPartsData);
+
+        sortedPartsData.comparatorProperty().bind(PartsTableView.comparatorProperty());
+
+        PartsTableView.setItems(sortedPartsData);
     }
 
     public void idHandler(ActionEvent actionEvent) {
@@ -71,6 +98,7 @@ public class AddProductController {
 
     @FXML
     private void initialize() {
+        // Initialize and update parts table
         PartIDAdd.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         PartNameAdd.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         InventoryLevelAdd.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
