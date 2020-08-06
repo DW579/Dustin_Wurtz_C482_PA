@@ -13,7 +13,7 @@
          <children>
             <Label layoutX="40.0" layoutY="24.0" text="Parts" />
             <Button fx:id="SearchParts" layoutX="251.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchHandlerParts" text="Search" />
-            <TextField fx:id="SearchTextParts" layoutX="318.0" layoutY="19.0" />
+            <TextField fx:id="SearchTextParts" layoutX="318.0" layoutY="19.0" onAction="#SearchPartsHandler" />
             <TableView fx:id="PartsTableView" layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="497.0">
               <columns>
                 <TableColumn fx:id="PartID" prefWidth="97.0" text="Part ID" />

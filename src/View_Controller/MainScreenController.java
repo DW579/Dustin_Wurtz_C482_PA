@@ -6,6 +6,7 @@ import Model.Part;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,8 @@ import java.util.ResourceBundle;
 
 public class MainScreenController {
     @FXML
+    private TextField SearchTextParts;
+    @FXML
     private TableView<Part> PartsTableView;
     @FXML
     private TableColumn<Part, Integer> PartID;
@@ -37,7 +40,6 @@ public class MainScreenController {
     private TableColumn<Part, Double> PriceParts;
 
     public Button SearchParts;
-    public TextField SearchTextParts;
     public Button SearchProducts;
     public TextField SearchTextProducts;
     public TableColumn ProductID;
@@ -45,7 +47,36 @@ public class MainScreenController {
     public TableColumn InventoryLevelProducts;
     public TableColumn PriceProducts;
 
+    FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
+
+    public void SearchPartsHandler(ActionEvent actionEvent) {
+
+    }
+
     public void searchHandlerParts(ActionEvent actionEvent) {
+        filteredPartsData.setPredicate(part -> {
+            // If filter text is empty, display all persons.
+            if (SearchTextParts.getText() == "") {
+                return true;
+            }
+
+            // Compare first name and last name of every person with filter text.
+            String lowerCaseFilter = SearchTextParts.getText().toLowerCase();
+
+            if (part.getName().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Filter matches first name.
+            }
+            else if (Integer.toString(part.getId()).contains(lowerCaseFilter)) {
+                return true; // Filter matches last name.
+            }
+            return false; // Does not match.
+        });
+
+        SortedList<Part> sortedPartsData = new SortedList<>(filteredPartsData);
+
+        sortedPartsData.comparatorProperty().bind(PartsTableView.comparatorProperty());
+
+        PartsTableView.setItems(sortedPartsData);
     }
 
     public void addHandlerParts(ActionEvent actionEvent) throws IOException {
@@ -129,5 +160,6 @@ public class MainScreenController {
         PriceParts.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         PartsTableView.setItems(Inventory.getAllParts());
     }
+
 
 }
