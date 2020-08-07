@@ -59,29 +59,24 @@ public class MainScreenController {
     @FXML
     private TableColumn<Product, Double> PriceProducts;
 
-    public Button SearchParts;
-    public Button SearchProducts;
-
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
     FilteredList<Product> filteredProductsData = new FilteredList<>(Inventory.getAllProducts(), p -> true);
 
     public void searchHandlerParts(ActionEvent actionEvent) {
         filteredPartsData.setPredicate(part -> {
-            // If filter text is empty, display all persons.
             if (SearchTextParts.getText() == "") {
                 return true;
             }
 
-            // Compare first name and last name of every person with filter text.
             String lowerCaseFilter = SearchTextParts.getText().toLowerCase();
 
             if (part.getName().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Filter matches first name.
+                return true;
             }
             else if (Integer.toString(part.getId()).contains(lowerCaseFilter)) {
-                return true; // Filter matches last name.
+                return true;
             }
-            return false; // Does not match.
+            return false;
         });
 
         SortedList<Part> sortedPartsData = new SortedList<>(filteredPartsData);
@@ -137,16 +132,15 @@ public class MainScreenController {
                 return true;
             }
 
-            // Compare first name and last name of every person with filter text.
             String lowerCaseFilter = SearchTextProducts.getText().toLowerCase();
 
             if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Filter matches first name.
+                return true;
             }
             else if (Integer.toString(product.getId()).contains(lowerCaseFilter)) {
-                return true; // Filter matches last name.
+                return true;
             }
-            return false; // Does not match.
+            return false;
         });
 
         SortedList<Product> sortedProductsData = new SortedList<>(filteredProductsData);
@@ -180,6 +174,12 @@ public class MainScreenController {
     }
 
     public void deleteHandlerProducts(ActionEvent actionEvent) {
+        // Get selected table row
+        Product selectedProduct = ProductsTableView.getSelectionModel().getSelectedItem();
+        // Delete selected Product
+        Inventory.deleteProduct(selectedProduct);
+        // Update the Table view
+        ProductsTableView.setItems(Inventory.getAllProducts());
     }
 
     public void exitHandler(ActionEvent actionEvent) {
@@ -202,6 +202,4 @@ public class MainScreenController {
         PriceProducts.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         ProductsTableView.setItems(Inventory.getAllProducts());
     }
-
-
 }

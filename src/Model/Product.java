@@ -102,6 +102,7 @@ public class Product {
         return max;
     }
 
+    // Add associated Part with the Product
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }

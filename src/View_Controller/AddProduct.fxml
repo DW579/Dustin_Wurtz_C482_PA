@@ -34,8 +34,8 @@
             <TextField fx:id="maxField" layoutX="63.0" layoutY="232.0" prefHeight="27.0" prefWidth="55.0" promptText="Max" />
             <Label layoutX="146.0" layoutY="237.0" text="Min" />
             <TextField fx:id="minField" layoutX="188.0" layoutY="232.0" prefHeight="27.0" prefWidth="55.0" promptText="Min" />
-            <Button layoutX="610.0" layoutY="202.0" mnemonicParsing="false" onAction="#addhandler" text="Add" />
-            <TableView layoutX="271.0" layoutY="259.0" prefHeight="110.0" prefWidth="394.0">
+            <Button layoutX="610.0" layoutY="202.0" mnemonicParsing="false" onAction="#addHandler" text="Add" />
+            <TableView fx:id="PartsTableViewIncluded" layoutX="271.0" layoutY="259.0" prefHeight="110.0" prefWidth="394.0">
                <columns>
                   <TableColumn fx:id="PartIDIncluded" prefWidth="75.0" text="Part ID" />
                   <TableColumn fx:id="PartNameIncluded" prefWidth="108.0" text="Part Name" />

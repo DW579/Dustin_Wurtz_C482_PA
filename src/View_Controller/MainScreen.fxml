@@ -12,7 +12,7 @@
       <AnchorPane layoutX="30.0" layoutY="74.0" prefHeight="332.0" prefWidth="541.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <Label layoutX="40.0" layoutY="24.0" text="Parts" />
-            <Button fx:id="SearchParts" layoutX="251.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchHandlerParts" text="Search" />
+            <Button layoutX="251.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchHandlerParts" text="Search" />
             <TextField fx:id="SearchTextParts" layoutX="318.0" layoutY="19.0" />
             <TableView fx:id="PartsTableView" layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="497.0">
               <columns>
@@ -31,7 +31,7 @@
       <AnchorPane layoutX="612.0" layoutY="74.0" prefHeight="332.0" prefWidth="541.0" style="-fx-border-color: black; -fx-border-radius: 10;">
          <children>
             <Label layoutX="40.0" layoutY="24.0" text="Products" />
-            <Button fx:id="SearchProducts" layoutX="251.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchHandlerProducts" text="Search" />
+            <Button layoutX="251.0" layoutY="19.0" mnemonicParsing="false" onAction="#searchHandlerProducts" text="Search" />
             <TextField fx:id="SearchTextProducts" layoutX="318.0" layoutY="19.0" />
             <TableView fx:id="ProductsTableView" layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="497.0">
                <columns>

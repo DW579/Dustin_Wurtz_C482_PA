@@ -11,8 +11,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class AddProductController {
+    // Search Parts from Inventory
     @FXML
     private TextField SearchField;
+
+    // All Parts from Inventory
     @FXML
     private TableView<Part> PartsTableView;
     @FXML
@@ -24,21 +27,30 @@ public class AddProductController {
     @FXML
     private TableColumn<Part, Double> PriceAdd;
 
+    // Selected Parts for Product
+    @FXML
+    private TableView<Part> PartsTableViewIncluded;
+    @FXML
+    private TableColumn<Part, Integer> PartIDIncluded;
+    @FXML
+    private TableColumn<Part, String> PartNameIncluded;
+    @FXML
+    private TableColumn<Part, Integer> InventoryLevelIncluded;
+    @FXML
+    private TableColumn<Part, Double> PriceIncluded;
+
     public TextField nameField;
     public TextField invField;
     public TextField priceField;
     public TextField maxField;
     public TextField minField;
     public Button Search;
-    public TableColumn PartIDIncluded;
-    public TableColumn PartNameIncluded;
-    public TableColumn InventoryLevelIncluded;
-    public TableColumn PriceIncluded;
     public Button Cancel;
 
-    // Initialize Part ID to be 0
+    // Initialize Product ID to be 0
     private static int dynamicProductId = 0;
 
+    // Filter for Parts table
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
 
     public void searchHandler(ActionEvent actionEvent) {
@@ -67,10 +79,20 @@ public class AddProductController {
         PartsTableView.setItems(sortedPartsData);
     }
 
-    public void addhandler(ActionEvent actionEvent) {
+    public void addHandler(ActionEvent actionEvent) {
+        Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
+
+        if(selectedPart != null) {
+            System.out.println(selectedPart.getId());
+
+        }
+        else {
+            System.out.println("No Part selected");
+        }
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
+
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
@@ -96,11 +118,18 @@ public class AddProductController {
 
     @FXML
     private void initialize() {
-        // Initialize and update parts table
+        // Initialize and update table for all Parts from Inventory
         PartIDAdd.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         PartNameAdd.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         InventoryLevelAdd.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
         PriceAdd.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         PartsTableView.setItems(Inventory.getAllParts());
+
+        // Initialize and update table for included Parts from Product object
+//        PartIDIncluded.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+//        PartNameIncluded.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+//        InventoryLevelIncluded.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+//        PriceIncluded.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+//        PartsTableViewIncluded.setItems(Product.getAllAssociatedParts());
     }
 }
