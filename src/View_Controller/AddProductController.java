@@ -2,6 +2,7 @@ package View_Controller;
 
 import Model.Inventory;
 import Model.Part;
+import Model.Product;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -23,18 +24,20 @@ public class AddProductController {
     @FXML
     private TableColumn<Part, Double> PriceAdd;
 
+    public TextField nameField;
+    public TextField invField;
+    public TextField priceField;
+    public TextField maxField;
+    public TextField minField;
     public Button Search;
-    public Label ID;
-    public Label Name;
-    public Label Inv;
-    public Label Price;
-    public Label Max;
-    public Label Min;
     public TableColumn PartIDIncluded;
     public TableColumn PartNameIncluded;
     public TableColumn InventoryLevelIncluded;
     public TableColumn PriceIncluded;
     public Button Cancel;
+
+    // Initialize Part ID to be 0
+    private static int dynamicProductId = 0;
 
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
 
@@ -64,24 +67,6 @@ public class AddProductController {
         PartsTableView.setItems(sortedPartsData);
     }
 
-    public void idHandler(ActionEvent actionEvent) {
-    }
-
-    public void nameHandler(ActionEvent actionEvent) {
-    }
-
-    public void invHandler(ActionEvent actionEvent) {
-    }
-
-    public void priceHandler(ActionEvent actionEvent) {
-    }
-
-    public void maxHandler(ActionEvent actionEvent) {
-    }
-
-    public void minHandler(ActionEvent actionEvent) {
-    }
-
     public void addhandler(ActionEvent actionEvent) {
     }
 
@@ -94,6 +79,19 @@ public class AddProductController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+        double priceDouble = Double.parseDouble(priceField.getText());
+        int stockInt = Integer.parseInt(invField.getText());
+        int minInt = Integer.parseInt(minField.getText());
+        int maxInt = Integer.parseInt(maxField.getText());
+        dynamicProductId += 1;
+
+        Product newProduct = new Product(dynamicProductId, nameField.getText(), priceDouble, stockInt, minInt, maxInt);
+
+        Inventory.addProduct(newProduct);
+
+        // Close save window after save
+        Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

@@ -3,6 +3,7 @@ package View_Controller;
 import Model.InHouse;
 import Model.Inventory;
 import Model.Part;
+import Model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -26,8 +27,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainScreenController {
+    // Search Parts table
     @FXML
     private TextField SearchTextParts;
+
+    // Parts Table View
     @FXML
     private TableView<Part> PartsTableView;
     @FXML
@@ -39,19 +43,23 @@ public class MainScreenController {
     @FXML
     private TableColumn<Part, Double> PriceParts;
 
+    // Product Table View
+    @FXML
+    private TableView<Product> ProductsTableView;
+    @FXML
+    private TableColumn<Product, Integer> ProductID;
+    @FXML
+    private TableColumn<Product, String> ProductName;
+    @FXML
+    private TableColumn<Product, Integer> InventoryLevelProducts;
+    @FXML
+    private TableColumn<Product, Double> PriceProducts;
+
     public Button SearchParts;
     public Button SearchProducts;
     public TextField SearchTextProducts;
-    public TableColumn ProductID;
-    public TableColumn ProductName;
-    public TableColumn InventoryLevelProducts;
-    public TableColumn PriceProducts;
 
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
-
-    public void SearchPartsHandler(ActionEvent actionEvent) {
-
-    }
 
     public void searchHandlerParts(ActionEvent actionEvent) {
         filteredPartsData.setPredicate(part -> {
@@ -120,6 +128,7 @@ public class MainScreenController {
     }
 
     public void searchHandlerProducts(ActionEvent actionEvent) {
+
     }
 
     public void addHandlerProducts(ActionEvent actionEvent) throws IOException {
@@ -154,11 +163,19 @@ public class MainScreenController {
 
     @FXML
     private void initialize() {
+        // Initialize and update Parts table
         PartID.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         PartName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         InventoryLevelParts.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
         PriceParts.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         PartsTableView.setItems(Inventory.getAllParts());
+
+        // Initialize and update Products table
+        ProductID.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        ProductName.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelProducts.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceProducts.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        ProductsTableView.setItems(Inventory.getAllProducts());
     }
 
 

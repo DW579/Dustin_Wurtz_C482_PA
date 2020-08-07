@@ -22,18 +22,18 @@
                   <TableColumn fx:id="PriceAdd" prefWidth="119.0" text="Price per Unit" />
               </columns>
             </TableView>
-            <Label fx:id="ID" layoutX="18.0" layoutY="81.0" text="ID" />
-            <Label fx:id="Name" layoutX="18.0" layoutY="125.0" text="Name" />
-            <Label fx:id="Inv" layoutX="18.0" layoutY="163.0" text="Inv" />
-            <Label fx:id="Price" layoutX="18.0" layoutY="198.0" text="Price" />
-            <Label fx:id="Max" layoutX="18.0" layoutY="237.0" text="Max" />
-            <TextField disable="true" layoutX="63.0" layoutY="76.0" onAction="#idHandler" prefHeight="27.0" prefWidth="137.0" promptText="Auto Gen - Disabled" />
-            <TextField layoutX="63.0" layoutY="120.0" onAction="#nameHandler" prefHeight="27.0" prefWidth="137.0" promptText="Product Name" />
-            <TextField layoutX="63.0" layoutY="158.0" onAction="#invHandler" prefHeight="27.0" prefWidth="137.0" promptText="Inv" />
-            <TextField layoutX="63.0" layoutY="193.0" onAction="#priceHandler" prefHeight="27.0" prefWidth="137.0" promptText="Price" />
-            <TextField layoutX="63.0" layoutY="232.0" onAction="#maxHandler" prefHeight="27.0" prefWidth="55.0" promptText="Max" />
-            <Label fx:id="Min" layoutX="146.0" layoutY="237.0" text="Min" />
-            <TextField layoutX="188.0" layoutY="232.0" onAction="#minHandler" prefHeight="27.0" prefWidth="55.0" promptText="Min" />
+            <Label layoutX="18.0" layoutY="81.0" text="ID" />
+            <Label layoutX="18.0" layoutY="125.0" text="Name" />
+            <Label layoutX="18.0" layoutY="163.0" text="Inv" />
+            <Label layoutX="18.0" layoutY="198.0" text="Price" />
+            <Label layoutX="18.0" layoutY="237.0" text="Max" />
+            <TextField disable="true" layoutX="63.0" layoutY="76.0" prefHeight="27.0" prefWidth="137.0" promptText="Auto Gen - Disabled" />
+            <TextField fx:id="nameField" layoutX="63.0" layoutY="120.0" prefHeight="27.0" prefWidth="137.0" promptText="Product Name" />
+            <TextField fx:id="invField" layoutX="63.0" layoutY="158.0" prefHeight="27.0" prefWidth="137.0" promptText="Inv" />
+            <TextField fx:id="priceField" layoutX="63.0" layoutY="193.0" prefHeight="27.0" prefWidth="137.0" promptText="Price" />
+            <TextField fx:id="maxField" layoutX="63.0" layoutY="232.0" prefHeight="27.0" prefWidth="55.0" promptText="Max" />
+            <Label layoutX="146.0" layoutY="237.0" text="Min" />
+            <TextField fx:id="minField" layoutX="188.0" layoutY="232.0" prefHeight="27.0" prefWidth="55.0" promptText="Min" />
             <Button layoutX="610.0" layoutY="202.0" mnemonicParsing="false" onAction="#addhandler" text="Add" />
             <TableView layoutX="271.0" layoutY="259.0" prefHeight="110.0" prefWidth="394.0">
                <columns>
