@@ -43,6 +43,10 @@ public class MainScreenController {
     @FXML
     private TableColumn<Part, Double> PriceParts;
 
+    // Search Products table
+    @FXML
+    private TextField SearchTextProducts;
+
     // Product Table View
     @FXML
     private TableView<Product> ProductsTableView;
@@ -57,9 +61,9 @@ public class MainScreenController {
 
     public Button SearchParts;
     public Button SearchProducts;
-    public TextField SearchTextProducts;
 
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
+    FilteredList<Product> filteredProductsData = new FilteredList<>(Inventory.getAllProducts(), p -> true);
 
     public void searchHandlerParts(ActionEvent actionEvent) {
         filteredPartsData.setPredicate(part -> {
@@ -128,7 +132,28 @@ public class MainScreenController {
     }
 
     public void searchHandlerProducts(ActionEvent actionEvent) {
+        filteredProductsData.setPredicate(product -> {
+            if (SearchTextProducts.getText() == "") {
+                return true;
+            }
 
+            // Compare first name and last name of every person with filter text.
+            String lowerCaseFilter = SearchTextProducts.getText().toLowerCase();
+
+            if (product.getName().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Filter matches first name.
+            }
+            else if (Integer.toString(product.getId()).contains(lowerCaseFilter)) {
+                return true; // Filter matches last name.
+            }
+            return false; // Does not match.
+        });
+
+        SortedList<Product> sortedProductsData = new SortedList<>(filteredProductsData);
+
+        sortedProductsData.comparatorProperty().bind(ProductsTableView.comparatorProperty());
+
+        ProductsTableView.setItems(sortedProductsData);
     }
 
     public void addHandlerProducts(ActionEvent actionEvent) throws IOException {
