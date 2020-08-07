@@ -3,11 +3,14 @@ package View_Controller;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 public class AddProductController {
@@ -53,6 +56,9 @@ public class AddProductController {
     // Filter for Parts table
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
 
+    // List of added Parts
+    private final ObservableList<Part> addedParts = FXCollections.observableArrayList();
+
     public void searchHandler(ActionEvent actionEvent) {
         filteredPartsData.setPredicate(part -> {
             // If filter text is empty, display all persons.
@@ -83,8 +89,7 @@ public class AddProductController {
         Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
 
         if(selectedPart != null) {
-            System.out.println(selectedPart.getId());
-
+            addedParts.add(selectedPart);
         }
         else {
             System.out.println("No Part selected");
@@ -126,10 +131,10 @@ public class AddProductController {
         PartsTableView.setItems(Inventory.getAllParts());
 
         // Initialize and update table for included Parts from Product object
-//        PartIDIncluded.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-//        PartNameIncluded.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
-//        InventoryLevelIncluded.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
-//        PriceIncluded.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-//        PartsTableViewIncluded.setItems(Product.getAllAssociatedParts());
+        PartIDIncluded.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        PartNameIncluded.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelIncluded.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceIncluded.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        PartsTableViewIncluded.setItems(addedParts);
     }
 }
