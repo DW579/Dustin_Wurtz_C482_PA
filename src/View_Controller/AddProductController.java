@@ -89,6 +89,7 @@ public class AddProductController {
         Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
 
         if(selectedPart != null) {
+            // Add part into the ObservableList<> addedParts
             addedParts.add(selectedPart);
         }
         else {
@@ -97,7 +98,14 @@ public class AddProductController {
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
+        Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
 
+        if(selectedPart != null) {
+            addedParts.remove(selectedPart);
+        }
+        else {
+            System.out.println("No part selected");
+        }
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
