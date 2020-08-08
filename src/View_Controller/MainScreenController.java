@@ -171,6 +171,13 @@ public class MainScreenController {
         stage.setTitle("Modify Product");
         stage.setScene(new Scene(rootModifyProduct));
         stage.show();
+
+        // Get ID of selected table row
+        Product product = ProductsTableView.getSelectionModel().getSelectedItem();
+
+        // Pass product id to ModifyProductController
+        ModifyProductController modifyProductController = fxmlLoader.getController();
+        modifyProductController.selectedProduct(product.getId());
     }
 
     public void deleteHandlerProducts(ActionEvent actionEvent) {

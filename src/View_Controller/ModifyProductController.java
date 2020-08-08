@@ -7,6 +7,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class ModifyProductController {
     public Button Search;
     public TextField SearchField;
@@ -25,6 +27,10 @@ public class ModifyProductController {
     public TableColumn InventoryLevelIncluded;
     public TableColumn PriceIncluded;
     public Button CancelButton;
+
+    public void selectedProduct(int id) throws IOException {
+        System.out.println(id);
+    }
 
     public void searchHandler(ActionEvent actionEvent) {
     }
