@@ -61,21 +61,19 @@ public class AddProductController {
 
     public void searchHandler(ActionEvent actionEvent) {
         filteredPartsData.setPredicate(part -> {
-            // If filter text is empty, display all persons.
             if (SearchField.getText() == "") {
                 return true;
             }
 
-            // Compare first name and last name of every person with filter text.
             String lowerCaseFilter = SearchField.getText().toLowerCase();
 
             if (part.getName().toLowerCase().contains(lowerCaseFilter)) {
-                return true; // Filter matches first name.
+                return true;
             }
             else if (Integer.toString(part.getId()).contains(lowerCaseFilter)) {
-                return true; // Filter matches last name.
+                return true;
             }
-            return false; // Does not match.
+            return false;
         });
 
         SortedList<Part> sortedPartsData = new SortedList<>(filteredPartsData);

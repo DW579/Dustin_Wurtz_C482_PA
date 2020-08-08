@@ -4,6 +4,8 @@ import Model.Inventory;
 import Model.Part;
 import Model.Product;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -45,6 +47,9 @@ public class ModifyProductController {
     @FXML
     private TableColumn<Part, Double> PriceAdd;
 
+    // Filter for Parts table
+    FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
+
     public void selectedProduct(int id) throws IOException {
         ObservableList<Product> allProdcutData = Inventory.getAllProducts();
 
@@ -64,6 +69,27 @@ public class ModifyProductController {
     }
 
     public void searchHandler(ActionEvent actionEvent) {
+        filteredPartsData.setPredicate(part -> {
+            if (SearchField.getText() == "") {
+                return true;
+            }
+
+            String lowerCaseFilter = SearchField.getText().toLowerCase();
+
+            if (part.getName().toLowerCase().contains(lowerCaseFilter)) {
+                return true;
+            }
+            else if (Integer.toString(part.getId()).contains(lowerCaseFilter)) {
+                return true;
+            }
+            return false;
+        });
+
+        SortedList<Part> sortedPartsData = new SortedList<>(filteredPartsData);
+
+        sortedPartsData.comparatorProperty().bind(PartsTableView.comparatorProperty());
+
+        PartsTableView.setItems(sortedPartsData);
     }
 
     public void addHandler(ActionEvent actionEvent) {
