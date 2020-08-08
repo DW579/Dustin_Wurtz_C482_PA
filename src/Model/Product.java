@@ -112,6 +112,10 @@ public class Product {
         associatedParts.remove(part);
     }
 
+    public void deleteAllAssociatedParts() {
+        associatedParts.clear();
+    }
+
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
     }

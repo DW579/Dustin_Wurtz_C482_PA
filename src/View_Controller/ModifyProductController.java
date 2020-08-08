@@ -109,6 +109,15 @@ public class ModifyProductController {
     }
 
     public void addHandler(ActionEvent actionEvent) {
+        Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
+
+        if(selectedPart != null) {
+            // Add part into the ObservableList<> addedParts
+            addedParts.add(selectedPart);
+        }
+        else {
+            System.out.println("No Part selected");
+        }
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
@@ -132,18 +141,26 @@ public class ModifyProductController {
 
         allProductsData.forEach(product -> {
             if( product.getId() == Integer.parseInt(IdField.getText())) {
-                int productId = Integer.parseInt(IdField.getText());
                 String productName = NameField.getText();
                 double productPrice = Double.parseDouble(PriceField.getText());
                 int productStock = Integer.parseInt(InvField.getText());
                 int productMax = Integer.parseInt(MaxField.getText());
                 int productMin = Integer.parseInt(MinField.getText());
 
+                // Set all updated data into Product
                 product.setName(productName);
                 product.setPrice(productPrice);
                 product.setStock(productStock);
                 product.setMax(productMax);
                 product.setMin(productMin);
+
+                // Clear out the associated parts list in the product
+                product.deleteAllAssociatedParts();
+
+                // Add all selected parts to the product
+                addedParts.forEach((part) -> {
+                    product.addAssociatedPart(part);
+                });
             }
         });
 
