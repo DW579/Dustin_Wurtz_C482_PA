@@ -6,21 +6,13 @@ import Model.Product;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ModifyProductController {
-    public Button Search;
     public TextField SearchField;
-    public TableColumn PartIDAdd;
-    public TableColumn PartNameAdd;
-    public TableColumn InventoryLevelAdd;
-    public TableColumn PriceAdd;
     public TableColumn PartIDIncluded;
     public TableColumn PartNameIncluded;
     public TableColumn InventoryLevelIncluded;
@@ -41,8 +33,19 @@ public class ModifyProductController {
     @FXML
     private TextField MinField;
 
+    // All Parts from Inventory
+    @FXML
+    private TableView<Part> PartsTableView;
+    @FXML
+    private TableColumn<Part, Integer> PartIDAdd;
+    @FXML
+    private TableColumn<Part, String> PartNameAdd;
+    @FXML
+    private TableColumn<Part, Integer> InventoryLevelAdd;
+    @FXML
+    private TableColumn<Part, Double> PriceAdd;
+
     public void selectedProduct(int id) throws IOException {
-        System.out.println(Inventory.getAllProducts());
         ObservableList<Product> allProdcutData = Inventory.getAllProducts();
 
         allProdcutData.forEach(product -> {
@@ -56,6 +59,8 @@ public class ModifyProductController {
                 MinField.setText(Integer.toString(product.getMin()));
             }
         });
+
+
     }
 
     public void searchHandler(ActionEvent actionEvent) {
@@ -73,5 +78,15 @@ public class ModifyProductController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void initialize() {
+        // Initialize and update table for all Parts from Inventory
+        PartIDAdd.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        PartNameAdd.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelAdd.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceAdd.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        PartsTableView.setItems(Inventory.getAllParts());
     }
 }
