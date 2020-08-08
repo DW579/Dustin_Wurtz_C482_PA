@@ -162,7 +162,6 @@ public class MainScreenController {
     }
 
     public void modifyHandlerProducts(ActionEvent actionEvent) throws IOException {
-        System.out.println("Modify products");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
         Parent rootModifyProduct = (Parent) fxmlLoader.load();
         Stage stage = new Stage();

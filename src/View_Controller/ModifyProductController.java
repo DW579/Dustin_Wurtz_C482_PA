@@ -128,6 +128,28 @@ public class ModifyProductController {
     }
 
     public void saveHandler(ActionEvent actionEvent) {
+        ObservableList<Product> allProductsData = Inventory.getAllProducts();
+
+        allProductsData.forEach(product -> {
+            if( product.getId() == Integer.parseInt(IdField.getText())) {
+                int productId = Integer.parseInt(IdField.getText());
+                String productName = NameField.getText();
+                double productPrice = Double.parseDouble(PriceField.getText());
+                int productStock = Integer.parseInt(InvField.getText());
+                int productMax = Integer.parseInt(MaxField.getText());
+                int productMin = Integer.parseInt(MinField.getText());
+
+                product.setName(productName);
+                product.setPrice(productPrice);
+                product.setStock(productStock);
+                product.setMax(productMax);
+                product.setMin(productMin);
+            }
+        });
+
+        // Close window after save
+        Stage stage = (Stage) CancelButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

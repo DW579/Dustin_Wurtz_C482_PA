@@ -107,7 +107,10 @@ public class Product {
         associatedParts.add(part);
     }
 
-//    Include here deleteAssociatedPart
+    // deleteAssociatedPart
+    public void deleteAssociatedPart(Part part) {
+        associatedParts.remove(part);
+    }
 
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
