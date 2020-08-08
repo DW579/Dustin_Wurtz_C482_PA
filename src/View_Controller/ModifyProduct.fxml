@@ -35,7 +35,7 @@
             <Label layoutX="124.0" layoutY="224.0" text="Min" />
             <TextField fx:id="MinField" layoutX="162.0" layoutY="219.0" prefHeight="27.0" prefWidth="69.0" />
             <Button layoutX="644.0" layoutY="197.0" mnemonicParsing="false" onAction="#addHandler" text="Add" />
-            <TableView layoutX="263.0" layoutY="258.0" prefHeight="124.0" prefWidth="436.0">
+            <TableView fx:id="PartsTableViewIncluded" layoutX="263.0" layoutY="258.0" prefHeight="124.0" prefWidth="436.0">
                <columns>
                   <TableColumn fx:id="PartIDIncluded" prefWidth="75.0" text="Part ID" />
                   <TableColumn fx:id="PartNameIncluded" prefWidth="128.0" text="Part Name" />

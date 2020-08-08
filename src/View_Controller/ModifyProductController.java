@@ -3,6 +3,7 @@ package View_Controller;
 import Model.Inventory;
 import Model.Part;
 import Model.Product;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -15,10 +16,6 @@ import java.io.IOException;
 
 public class ModifyProductController {
     public TextField SearchField;
-    public TableColumn PartIDIncluded;
-    public TableColumn PartNameIncluded;
-    public TableColumn InventoryLevelIncluded;
-    public TableColumn PriceIncluded;
     public Button CancelButton;
 
     // Selected product data
@@ -47,8 +44,23 @@ public class ModifyProductController {
     @FXML
     private TableColumn<Part, Double> PriceAdd;
 
+    // Selected Parts for Product
+    @FXML
+    private TableView<Part> PartsTableViewIncluded;
+    @FXML
+    private TableColumn<Part, Integer> PartIDIncluded;
+    @FXML
+    private TableColumn<Part, String> PartNameIncluded;
+    @FXML
+    private TableColumn<Part, Integer> InventoryLevelIncluded;
+    @FXML
+    private TableColumn<Part, Double> PriceIncluded;
+
     // Filter for Parts table
     FilteredList<Part> filteredPartsData = new FilteredList<>(Inventory.getAllParts(), p -> true);
+
+    // List of added Parts
+    private final ObservableList<Part> addedParts = FXCollections.observableArrayList();
 
     public void selectedProduct(int id) throws IOException {
         ObservableList<Product> allProdcutData = Inventory.getAllProducts();
@@ -62,6 +74,10 @@ public class ModifyProductController {
                 PriceField.setText(Double.toString(product.getPrice()));
                 MaxField.setText(Integer.toString(product.getMax()));
                 MinField.setText(Integer.toString(product.getMin()));
+
+                product.getAllAssociatedParts().forEach(part -> {
+                    addedParts.add(part);
+                });
             }
         });
 
@@ -114,5 +130,12 @@ public class ModifyProductController {
         InventoryLevelAdd.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
         PriceAdd.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         PartsTableView.setItems(Inventory.getAllParts());
+
+        // Initialize and update table for included Parts from Product object
+        PartIDIncluded.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        PartNameIncluded.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        InventoryLevelIncluded.setCellValueFactory(cellData -> cellData.getValue().stockProperty().asObject());
+        PriceIncluded.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
+        PartsTableViewIncluded.setItems(addedParts);
     }
 }
