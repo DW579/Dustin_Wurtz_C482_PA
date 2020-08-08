@@ -112,6 +112,14 @@ public class ModifyProductController {
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
+        Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
+
+        if(selectedPart != null) {
+            addedParts.remove(selectedPart);
+        }
+        else {
+            System.out.println("No part selected");
+        }
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
