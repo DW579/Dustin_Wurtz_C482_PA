@@ -122,6 +122,11 @@ public class AddProductController {
 
         Product newProduct = new Product(dynamicProductId, nameField.getText(), priceDouble, stockInt, minInt, maxInt);
 
+        // Add all selected parts to the product
+        addedParts.forEach((part) -> {
+            newProduct.addAssociatedPart(part);
+        });
+
         Inventory.addProduct(newProduct);
 
         // Close save window after save
