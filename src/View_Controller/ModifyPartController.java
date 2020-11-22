@@ -8,9 +8,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class ModifyPartController {
     @FXML
@@ -137,7 +139,17 @@ public class ModifyPartController {
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
-        Stage stage = (Stage) CancelButton.getScene().getWindow();
-        stage.close();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Cancel?");
+        confirmDelete.setHeaderText("Cancel?");
+        confirmDelete.setContentText("Are you sure you want to cancel?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            // Close save window on cancel
+            Stage stage = (Stage) CancelButton.getScene().getWindow();
+            stage.close();
+        }
     }
 }

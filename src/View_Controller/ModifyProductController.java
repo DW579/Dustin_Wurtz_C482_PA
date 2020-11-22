@@ -10,9 +10,11 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class ModifyProductController {
     public TextField SearchField;
@@ -121,52 +123,80 @@ public class ModifyProductController {
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
-        Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Delete?");
+        confirmDelete.setHeaderText("Delete?");
+        confirmDelete.setContentText("Are you sure you want to delete this part?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
 
-        if(selectedPart != null) {
-            addedParts.remove(selectedPart);
-        }
-        else {
-            System.out.println("No part selected");
+        if(userChoice.get() == ButtonType.OK) {
+            Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
+
+            if(selectedPart != null) {
+                addedParts.remove(selectedPart);
+            }
+            else {
+                System.out.println("No part selected");
+            }
         }
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
-        Stage stage = (Stage) CancelButton.getScene().getWindow();
-        stage.close();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Cancel?");
+        confirmDelete.setHeaderText("Cancel?");
+        confirmDelete.setContentText("Are you sure you want to cancel?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            // Close save window on cancel
+            Stage stage = (Stage) CancelButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void saveHandler(ActionEvent actionEvent) {
         ObservableList<Product> allProductsData = Inventory.getAllProducts();
 
-        allProductsData.forEach(product -> {
-            if( product.getId() == Integer.parseInt(IdField.getText())) {
-                String productName = NameField.getText();
-                double productPrice = Double.parseDouble(PriceField.getText());
-                int productStock = Integer.parseInt(InvField.getText());
-                int productMax = Integer.parseInt(MaxField.getText());
-                int productMin = Integer.parseInt(MinField.getText());
+        if(addedParts.size() > 0) {
+            allProductsData.forEach(product -> {
+                if( product.getId() == Integer.parseInt(IdField.getText())) {
+                    String productName = NameField.getText();
+                    double productPrice = Double.parseDouble(PriceField.getText());
+                    int productStock = Integer.parseInt(InvField.getText());
+                    int productMax = Integer.parseInt(MaxField.getText());
+                    int productMin = Integer.parseInt(MinField.getText());
 
-                // Set all updated data into Product
-                product.setName(productName);
-                product.setPrice(productPrice);
-                product.setStock(productStock);
-                product.setMax(productMax);
-                product.setMin(productMin);
+                    // Set all updated data into Product
+                    product.setName(productName);
+                    product.setPrice(productPrice);
+                    product.setStock(productStock);
+                    product.setMax(productMax);
+                    product.setMin(productMin);
 
-                // Clear out the associated parts list in the product
-                product.deleteAllAssociatedParts();
+                    // Clear out the associated parts list in the product
+                    product.deleteAllAssociatedParts();
 
-                // Add all selected parts to the product
-                addedParts.forEach((part) -> {
-                    product.addAssociatedPart(part);
-                });
-            }
-        });
+                    // Add all selected parts to the product
+                    addedParts.forEach((part) -> {
+                        product.addAssociatedPart(part);
+                    });
+                }
+            });
 
-        // Close window after save
-        Stage stage = (Stage) CancelButton.getScene().getWindow();
-        stage.close();
+            // Close window after save
+            Stage stage = (Stage) CancelButton.getScene().getWindow();
+            stage.close();
+        }
+        else {
+            Alert popUp = new Alert(Alert.AlertType.INFORMATION);
+            popUp.setTitle("Part Error");
+            popUp.setHeaderText("No part added");
+            popUp.setContentText("Please add a part");
+            popUp.showAndWait();
+        }
     }
 
     @FXML

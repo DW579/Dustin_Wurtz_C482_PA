@@ -11,7 +11,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class AddProductController {
     // Search Parts from Inventory
@@ -96,40 +99,69 @@ public class AddProductController {
     }
 
     public void deleteHandler(ActionEvent actionEvent) {
-        Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Delete?");
+        confirmDelete.setHeaderText("Delete?");
+        confirmDelete.setContentText("Are you sure you want to delete this part?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
 
-        if(selectedPart != null) {
-            addedParts.remove(selectedPart);
-        }
-        else {
-            System.out.println("No part selected");
+        if(userChoice.get() == ButtonType.OK) {
+            Part selectedPart = PartsTableViewIncluded.getSelectionModel().getSelectedItem();
+
+            if(selectedPart != null) {
+                addedParts.remove(selectedPart);
+            }
+            else {
+                System.out.println("No part selected");
+            }
         }
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
-        Stage stage = (Stage) Cancel.getScene().getWindow();
-        stage.close();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Cancel?");
+        confirmDelete.setHeaderText("Cancel?");
+        confirmDelete.setContentText("Are you sure you want to cancel?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            // Close save window on cancel
+            Stage stage = (Stage) Cancel.getScene().getWindow();
+            stage.close();
+        }
     }
 
     public void saveHandler(ActionEvent actionEvent) {
-        double priceDouble = Double.parseDouble(priceField.getText());
-        int stockInt = Integer.parseInt(invField.getText());
-        int minInt = Integer.parseInt(minField.getText());
-        int maxInt = Integer.parseInt(maxField.getText());
-        dynamicProductId += 1;
+        if(addedParts.size() > 0) {
+            double priceDouble = Double.parseDouble(priceField.getText());
+            int stockInt = Integer.parseInt(invField.getText());
+            int minInt = Integer.parseInt(minField.getText());
+            int maxInt = Integer.parseInt(maxField.getText());
+            dynamicProductId += 1;
 
-        Product newProduct = new Product(dynamicProductId, nameField.getText(), priceDouble, stockInt, minInt, maxInt);
+            Product newProduct = new Product(dynamicProductId, nameField.getText(), priceDouble, stockInt, minInt, maxInt);
 
-        // Add all selected parts to the product
-        addedParts.forEach((part) -> {
-            newProduct.addAssociatedPart(part);
-        });
+            // Add all selected parts to the product
+            addedParts.forEach((part) -> {
+                newProduct.addAssociatedPart(part);
+            });
 
-        Inventory.addProduct(newProduct);
+            Inventory.addProduct(newProduct);
 
-        // Close save window after save
-        Stage stage = (Stage) Cancel.getScene().getWindow();
-        stage.close();
+            // Close save window after save
+            Stage stage = (Stage) Cancel.getScene().getWindow();
+            stage.close();
+        }
+        else {
+            Alert popUp = new Alert(Alert.AlertType.INFORMATION);
+            popUp.setTitle("Part Error");
+            popUp.setHeaderText("No part added");
+            popUp.setContentText("Please add a part");
+            popUp.showAndWait();
+        }
+
     }
 
     @FXML

@@ -14,16 +14,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainScreenController {
@@ -117,13 +115,21 @@ public class MainScreenController {
     }
 
     public void deleteHandlerParts(ActionEvent actionEvent) {
-        // Get selected table row
-        Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
-        // Delete selectedPart
-        Inventory.deletePart(selectedPart);
-        // Update the Table view
-        PartsTableView.setItems(Inventory.getAllParts());
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Delete?");
+        confirmDelete.setHeaderText("Delete?");
+        confirmDelete.setContentText("Are you sure you want to delete this Part?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
 
+        if(userChoice.get() == ButtonType.OK) {
+            // Get selected table row
+            Part selectedPart = PartsTableView.getSelectionModel().getSelectedItem();
+            // Delete selectedPart
+            Inventory.deletePart(selectedPart);
+            // Update the Table view
+            PartsTableView.setItems(Inventory.getAllParts());
+        }
     }
 
     public void searchHandlerProducts(ActionEvent actionEvent) {
@@ -180,16 +186,34 @@ public class MainScreenController {
     }
 
     public void deleteHandlerProducts(ActionEvent actionEvent) {
-        // Get selected table row
-        Product selectedProduct = ProductsTableView.getSelectionModel().getSelectedItem();
-        // Delete selected Product
-        Inventory.deleteProduct(selectedProduct);
-        // Update the Table view
-        ProductsTableView.setItems(Inventory.getAllProducts());
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Delete?");
+        confirmDelete.setHeaderText("Delete?");
+        confirmDelete.setContentText("Are you sure you want to delete this Product?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            // Get selected table row
+            Product selectedProduct = ProductsTableView.getSelectionModel().getSelectedItem();
+            // Delete selected Product
+            Inventory.deleteProduct(selectedProduct);
+            // Update the Table view
+            ProductsTableView.setItems(Inventory.getAllProducts());
+        }
     }
 
     public void exitHandler(ActionEvent actionEvent) {
-        System.exit(0);
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Exit?");
+        confirmDelete.setHeaderText("Exit?");
+        confirmDelete.setContentText("Are you sure you want to exit?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            System.exit(0);
+        }
     }
 
     @FXML

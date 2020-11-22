@@ -7,11 +7,11 @@ import Model.Inventory;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.util.Optional;
 
 public class AddPartController {
     @FXML
@@ -97,8 +97,17 @@ public class AddPartController {
     }
 
     public void cancelHandler(ActionEvent actionEvent) {
-        // Close save window on cancel
-        Stage stage = (Stage) Cancel.getScene().getWindow();
-        stage.close();
+        Alert confirmDelete = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmDelete.initModality(Modality.NONE);
+        confirmDelete.setTitle("Cancel?");
+        confirmDelete.setHeaderText("Cancel?");
+        confirmDelete.setContentText("Are you sure you want to cancel?");
+        Optional<ButtonType> userChoice = confirmDelete.showAndWait();
+
+        if(userChoice.get() == ButtonType.OK) {
+            // Close save window on cancel
+            Stage stage = (Stage) Cancel.getScene().getWindow();
+            stage.close();
+        }
     }
 }
